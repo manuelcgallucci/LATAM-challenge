@@ -1,6 +1,6 @@
 import pandas as pd
-import xgboost as xgb
 import numpy as np
+from xgboost import XGBClassifier
 
 from typing import Tuple, Union, List
 from datetime import datetime
@@ -10,9 +10,10 @@ class DelayModel:
     def __init__(
         self
     ):
-        self._model = xgb.XGBClassifier(random_state=1, learning_rate=0.01, scale_pos_weight=4.440)
+        self._model = XGBClassifier(random_state=1, learning_rate=0.01, scale_pos_weight=4.440)
+        self._model.load_model("models/xgboost_model.json")
 
-    def _get_min_diff(data: pd.Dataframe) -> pd.DataFrame:
+    def _get_min_diff(self, data: pd.DataFrame) -> pd.DataFrame:
         """
         Get minimum difference of datetimes for delay calculations
         """
@@ -25,7 +26,7 @@ class DelayModel:
         self,
         data: pd.DataFrame,
         target_column: str = None
-    ) -> Union(Tuple[pd.DataFrame, pd.DataFrame], pd.DataFrame):
+    ) -> Union[Tuple[pd.DataFrame, pd.DataFrame], pd.DataFrame]:
         """
         Prepare raw data for training or predict.
 
@@ -56,14 +57,13 @@ class DelayModel:
             pd.get_dummies(data['MES'], prefix = 'MES')], 
             axis = 1
         )
-        features = features[top_10_features]
-
+        features = features.reindex(columns=top_10_features, fill_value=0)
 
         if target_column is not None:
             threshold_in_minutes = 15
 
             min_diff = data.apply(self._get_min_diff, axis = 1)
-            targets = pd.DataFrame(np.where(min_diff > threshold_in_minutes, 1, 0), [target_column])
+            targets = pd.DataFrame(np.where(min_diff > threshold_in_minutes, 1, 0), columns=[target_column])
 
             return features, targets
 
