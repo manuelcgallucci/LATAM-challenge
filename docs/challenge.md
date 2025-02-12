@@ -76,7 +76,7 @@ Extra additions that should be put in place:
 The Makefile had to be modified so that flask is updated (to 3.1.5). The stress tests where successful, these are the results:
 
 ```
-2025-02-12 12:45:26,174] manuel-laptop/INFO/locust.main: Time limit reached. Stopping Locust.
+[2025-02-12 12:45:26,174] manuel-laptop/INFO/locust.main: Time limit reached. Stopping Locust.
 [2025-02-12 12:45:26,176] manuel-laptop/INFO/locust.runners: Stopping 60 users
 [2025-02-12 12:45:26,233] manuel-laptop/INFO/locust.runners: 60 Users have been stopped, 0 still running
 [2025-02-12 12:45:26,267] manuel-laptop/INFO/locust.main: Running teardowns...
