@@ -1,0 +1,4 @@
+{
+    "status": "OK",
+    "detail": "your request was received"
+}
