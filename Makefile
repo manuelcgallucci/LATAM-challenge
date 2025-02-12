@@ -23,9 +23,11 @@ install:		## Install dependencies
 	pip install -r requirements-dev.txt
 	pip install -r requirements-test.txt
 
-STRESS_URL = http://127.0.0.1:8080
+STRESS_URL = https://latam-api-mcg-458681866168.us-central1.run.app
+
 .PHONY: stress-test
 stress-test:
+	pip install --upgrade flask
 	# change stress url to your deployed app
 	mkdir reports || true
 	locust -f tests/stress/api_stress.py --print-stats --html reports/stress-test.html --run-time 60s --headless --users 100 --spawn-rate 1 -H $(STRESS_URL)

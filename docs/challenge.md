@@ -70,3 +70,28 @@ Extra additions that should be put in place:
 - Adding the staging branch for qa (between develop and main)
 - Adding a pre-commit hook to the user IDE (pre-commit install)
 - Adding environment and github secrets
+
+# Part V (Stress test on API) [Extra]
+
+The Makefile had to be modified so that flask is updated (to 3.1.5). The stress tests where successful, these are the results:
+
+```
+2025-02-12 12:45:26,174] manuel-laptop/INFO/locust.main: Time limit reached. Stopping Locust.
+[2025-02-12 12:45:26,176] manuel-laptop/INFO/locust.runners: Stopping 60 users
+[2025-02-12 12:45:26,233] manuel-laptop/INFO/locust.runners: 60 Users have been stopped, 0 still running
+[2025-02-12 12:45:26,267] manuel-laptop/INFO/locust.main: Running teardowns...
+[2025-02-12 12:45:26,267] manuel-laptop/INFO/locust.main: Shutting down (exit code 0), bye.
+[2025-02-12 12:45:26,267] manuel-laptop/INFO/locust.main: Cleaning up runner...
+ Name                                                          # reqs      # fails  |     Avg     Min     Max  Median  |   req/s failures/s
+--------------------------------------------------------------------------------------------------------------------------------------------
+ POST /predict                                                   1851     0(0.00%)  |     964     184    2901     750  |   30.92    0.00
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregated                                                      1851     0(0.00%)  |     964     184    2901     750  |   30.92    0.00
+
+Response time percentiles (approximated)
+ Type     Name                                                              50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|------------------------------------------------------------|---------|------|------|------|------|------|------|------|------|------|------|------|
+ POST     /predict                                                          750   1100   1300   1600   2200   2600   2700   2800   2900   2900   2900   1851
+--------|------------------------------------------------------------|---------|------|------|------|------|------|------|------|------|------|------|------|
+ None     Aggregated                                                        750   1100   1300   1600   2200   2600   2700   2800   2900   2900   2900   1851
+```
