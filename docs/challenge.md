@@ -11,7 +11,7 @@
 ## Writing model class
 
 - Writing model.py, the method _get_min_diff was added from the collab, which should also be tested in test_model.py.
-- The preprocessing is done by doing one-hot encoding and taking the top10 features. Targets are calculated the same way as the ipynb. 
+- The preprocessing is done by doing one-hot encoding and taking the top10 features. Targets are calculated the same way as the ipynb.
 - The fit is done directly using the features and targets. Here, we asume the train/test split is done somewhere else.
 
 - The model is trained on the data and then exported using joblib to be used in production
@@ -35,7 +35,7 @@
 - Proper mocking should be done in the test so that the model is not loaded
 - Fix column tests for request not being independently checking the columns
 
-# Part III 
+# Part III
 
 ## Deploying the API using GCP
 
