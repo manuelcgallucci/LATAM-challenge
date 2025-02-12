@@ -1,6 +1,4 @@
-
-
-## Part I
+# Part I
 
 ### Choosing the model from the DS work
 
