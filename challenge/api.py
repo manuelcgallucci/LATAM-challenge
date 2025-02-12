@@ -1,10 +1,12 @@
 import fastapi
 
+import pandas as pd
 from pydantic import BaseModel
 from typing import List
+import joblib
 
-
-from model import DelayModel
+from challenge.model import DelayModel
+from challenge.request_model import PredictRequest
 
 app = fastapi.FastAPI()
 
@@ -14,16 +16,12 @@ async def get_health() -> dict:
         "status": "OK"
     }
 
-
-class FlightData(BaseModel):
-    OPERA: str
-    TIPOVUELO: str
-    MES: int
-
-class PredictRequest(BaseModel):
-    flights: List[FlightData]
-
 @app.post("/predict", status_code=200)
 async def post_predict(request: PredictRequest) -> dict:
-    for flight in request.flights:
-        
+    model = DelayModel()
+    
+    data = pd.DataFrame([f.dict() for f in request.flights])
+    preprocessed_data = model.preprocess(data, target_column=None)
+
+    predictions = model.predict(preprocessed_data)
+    return {"predict": predictions}
