@@ -10,7 +10,7 @@ def send_challenge():
         "name": "Manuel Cabeza Gallucci",
         "mail": "mcabezag@fi.uba.com",
         "github_url": "https://github.com/manuelcgallucci/LATAM-challenge",
-        "api_url": "https://latam-api-mcg-458681866168.us-central1.run.app",
+        "api_url": "https://latam-challenge-mcg-1033345485079.us-central1.run.app",
     }
 
     response = requests.post(url, json=body)

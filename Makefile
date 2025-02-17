@@ -23,7 +23,7 @@ install:		## Install dependencies
 	pip install -r requirements-dev.txt
 	pip install -r requirements-test.txt
 
-STRESS_URL = https://latam-api-mcg-458681866168.us-central1.run.app
+STRESS_URL = https://latam-challenge-mcg-1033345485079.us-central1.run.app
 
 .PHONY: stress-test
 stress-test:
