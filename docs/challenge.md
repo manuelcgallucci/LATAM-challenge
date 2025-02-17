@@ -61,7 +61,9 @@ The pipeline for continous integration should run the tests whenever a pr is don
 
 ## CD pipeline
 
-The pipeline for continous delivery runs when a push is made to the main branch. It was done using the Cloud Run to build the Dockerfile that is defined in the repos root dir (/Dockerfile). The trigger is setup via cloud Build to look for pushes to the main branch. (for challenge purposes I have chosen the yml to be explicitly defined in the repo (GC allows for inline yaml)). The yaml used in GCP is can be found [here](/docs/cloudbuild.yaml)
+There are many ways of deploying using GCP, such as using the container registry and deploying with commands directly in the cd.yaml. Also, the model would typically be saved in a google cloud bucket. In this case I used Cloud Build and Cloud Run.
+
+The pipeline for continous delivery runs when a push is made to the main branch. It was done using the Cloud Run to build the Dockerfile that is defined in the repos root dir (/Dockerfile). The trigger is setup via cloud Build to look for pushes to the main branch. The yaml used by GCP once it is all setup can be found [here](/docs/cloudbuild.yaml). This could also be done manually in a cd.yaml.
 
 ## Comments on possible improvements to the pipelines:
 Extra additions that should be put in place:
